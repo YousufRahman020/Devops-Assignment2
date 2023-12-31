@@ -22,7 +22,7 @@ jobs:
           command: |
             export NVM_DIR=/home/ubuntu/.nvm
             source /home/ubuntu/.nvm/nvm.sh
-            cd "/mnt/c/Users/Lucifer/Desktop/Devops Practice/Assignment2"
+            cd /home/ubuntu/devops/Devops-Assignment2/App
             git pull origin main
             cd App/
             killall node

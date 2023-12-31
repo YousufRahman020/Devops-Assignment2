@@ -1,0 +1,37 @@
+name: "Testing the latest pull request for validation"
+run-name: "execute by ${{ github.actor }} using ${{ github.event_name }} on ${{ github.repository }} repository"
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:    
+  
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking out
+        uses: actions/checkout@v4
+
+      - name: Running tests on aws testing server
+        uses: JimCronqvist/action-ssh@master
+        with:
+          hosts: 'ubuntu@16.170.203.108'
+          privatekey: ${{secrets.EC2_SERVER}}
+          command: |
+            export NVM_DIR=/home/ubuntu/.nvm
+            source /home/ubuntu/.nvm/nvm.sh
+            cd /home/ubuntu/devops/Devops-Assignment2/App/
+            git checkout fix
+            git pull origin fix
+            npm run build-react
+            npm run test-react
+            npx eslint src/App.js index.js
+
+      - name: Notify on success
+        if: success()
+        run: echo "successfulyy passed all the tests"
+      - name: Notify on Failure
+        if: failure()
+        run: echo "the test failed"
