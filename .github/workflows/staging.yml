@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@v4
       - name: "Connecting to AWS"
         uses: JimCronqvist/action-ssh@master
-        with: 
-          hosts: 16.171.44.97
+        with:
+          hosts: 'ubuntu@51.20.5.52'
           privatekey: ${{ secrets.EC2_SERVER }}
           command: |
             export NVM_DIR=/home/ubuntu/.nvm
