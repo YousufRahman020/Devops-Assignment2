@@ -10,7 +10,7 @@ on:
 
 jobs:
   First-Job:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: "Checking out the repository"
         uses: actions/checkout@v4
